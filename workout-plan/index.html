@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kshitij's 6-Day Workout Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --card: #16161f;
+      --border: #2a2a3a;
+      --accent: #e8ff47;
+      --accent2: #ff6b35;
+      --accent3: #47c8ff;
+      --text: #f0f0f0;
+      --muted: #7a7a9a;
+      --push: #ff6b35;
+      --pull: #47c8ff;
+      --legs: #a47fff;
+      --cardio: #e8ff47;
+      --full: #ff4f9a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    .hero {
+      position: relative;
+      padding: 80px 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: -10px; left: -20px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(100px, 18vw, 220px);
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(232,255,71,0.07);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 9vw, 110px);
+      line-height: 0.95;
+      letter-spacing: 1px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .accent-line {
+      height: 3px; width: 60px;
+      background: var(--accent);
+      margin: 20px 0 32px;
+      animation: fadeUp 0.6s 0.15s ease both;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .meta-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .meta-pill .dot.blue { background: var(--accent3); }
+    .meta-pill .dot.orange { background: var(--accent2); }
+
+    .schedule-strip {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 40px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .strip-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .strip-day {
+      padding: 16px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .strip-day:last-child { border-right: none; }
+
+    .strip-day .day-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .strip-day .day-type {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+
+    .type-push { color: var(--push); background: rgba(255,107,53,0.12); }
+    .type-pull { color: var(--pull); background: rgba(71,200,255,0.12); }
+    .type-legs { color: var(--legs); background: rgba(164,127,255,0.12); }
+    .type-cardio { color: var(--cardio); background: rgba(232,255,71,0.12); }
+    .type-full { color: var(--full); background: rgba(255,79,154,0.12); }
+    .type-rest { color: var(--muted); background: rgba(122,122,154,0.1); }
+
+    .tips-banner {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 40px;
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tip-item {
+      background: var(--card);
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .tip-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+    .tip-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    .days-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .day-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .day-card:nth-child(1) { animation-delay: 0.4s; }
+    .day-card:nth-child(2) { animation-delay: 0.45s; }
+    .day-card:nth-child(3) { animation-delay: 0.5s; }
+    .day-card:nth-child(4) { animation-delay: 0.55s; }
+    .day-card:nth-child(5) { animation-delay: 0.6s; }
+    .day-card:nth-child(6) { animation-delay: 0.65s; }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .day-header:hover { background: rgba(255,255,255,0.02); }
+    .day-header-left { display: flex; align-items: center; gap: 20px; }
+
+    .day-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      line-height: 1;
+      color: rgba(255,255,255,0.08);
+      min-width: 52px;
+    }
+
+    .day-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; }
+    .day-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.5px; line-height: 1; }
+    .day-subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .toggle-icon {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      color: var(--muted);
+      transition: transform 0.3s;
+    }
+
+    .day-card.open .toggle-icon { transform: rotate(180deg); }
+
+    .day-body { display: none; padding: 0 28px 28px; }
+    .day-card.open .day-body { display: block; }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 20px 0 12px;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead tr { border-bottom: 1px solid var(--border); }
+    thead th { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 12px; font-weight: 400; }
+    tbody tr { border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 0.15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 13px 12px; color: var(--text); }
+    tbody td:first-child { font-weight: 500; }
+
+    tbody tr.ex-row { cursor: pointer; }
+    tbody tr.ex-row:hover { background: rgba(232,255,71,0.05); }
+    tbody tr.ex-row:hover td:first-child { color: var(--accent); }
+
+    .ex-name-cell { display: flex; align-items: center; gap: 8px; }
+
+    .ex-hint {
+      font-size: 9px;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 1px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    tbody tr.ex-row:hover .ex-hint { opacity: 1; }
+
+    .sets-badge { display: inline-block; background: rgba(255,255,255,0.06); border-radius: 4px; padding: 2px 8px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); }
+    .rest-badge { display: inline-block; border-radius: 4px; padding: 2px 8px; font-family: 'Space Mono', monospace; font-size: 11px; }
+    .rest-60 { background: rgba(71,200,255,0.1); color: var(--accent3); }
+    .rest-45 { background: rgba(232,255,71,0.1); color: var(--accent); }
+    .activity-row td:first-child { color: var(--accent); }
+
+    .day-note {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.03);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .day-note strong { color: var(--text); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: #1a1a26;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.25s;
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .modal-overlay.active .modal { transform: translateY(0) scale(1); }
+
+    .modal-close {
+      position: sticky;
+      top: 12px;
+      float: right;
+      margin: 12px 12px 0 0;
+      width: 34px; height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(20,20,32,0.9);
+      color: var(--muted);
+      font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+      z-index: 10;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+
+    .modal-gif-area {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #12121e, #1e1e32);
+      border-radius: 20px 20px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 64px;
+    }
+
+    .modal-gif-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-body { padding: 22px 28px 28px; }
+
+    .modal-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 0.5px; line-height: 1; margin-bottom: 16px; }
+
+    .modal-muscles { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+    .muscle-chip { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: rgba(232,255,71,0.1); color: var(--accent); }
+
+    .modal-section-title { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+
+    .modal-steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+
+    .modal-step { display: flex; gap: 14px; align-items: flex-start; }
+    .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--accent); line-height: 1; min-width: 22px; margin-top: 1px; }
+    .step-text { font-size: 14px; line-height: 1.65; color: #d0d0e0; }
+
+    .modal-tip {
+      background: rgba(255,107,53,0.06);
+      border-left: 3px solid var(--accent2);
+      border-radius: 0 8px 8px 0;
+      padding: 13px 16px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .modal-tip strong { color: var(--text); }
+
+    .modal-yt {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,0,0,0.07);
+      border: 1px solid rgba(255,0,0,0.18);
+      border-radius: 12px;
+      padding: 14px 18px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .modal-yt:hover { background: rgba(255,0,0,0.13); border-color: rgba(255,0,0,0.35); }
+
+    .yt-icon {
+      width: 40px; height: 40px;
+      background: #ff0000;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .yt-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .yt-title { font-size: 13px; font-weight: 600; color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer .footer-left { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: rgba(255,255,255,0.15); }
+    footer .footer-right { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .hero, .schedule-strip, .tips-banner, .days-section { padding-left: 20px; padding-right: 20px; }
+      .strip-day { padding: 10px 4px; }
+      .strip-day .day-type { font-size: 9px; padding: 2px 3px; }
+      table { font-size: 12px; }
+      .day-header { padding: 18px 20px; }
+      .day-body { padding: 0 20px 20px; }
+      .modal-body { padding: 16px 18px 22px; }
+      .modal-title { font-size: 28px; }
+      .ex-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg-text">KSHITIJ</div>
+  <div class="hero-tag">Kshitij's Plan · General Fitness · Beginner · Full Gym</div>
+  <h1>Kshitij's<br/>6-Day<br/><span>Workout</span></h1>
+  <div class="accent-line"></div>
+  <div class="hero-meta">
+    <div class="meta-pill"><span class="dot"></span> 6 Training Days</div>
+    <div class="meta-pill"><span class="dot blue"></span> 1 Rest Day (Sat)</div>
+    <div class="meta-pill"><span class="dot orange"></span> Push / Pull / Legs Split</div>
+  </div>
+</section>
+
+<div class="schedule-strip">
+  <div class="strip-label">Weekly Schedule</div>
+  <div class="strip">
+    <div class="strip-day"><div class="day-name">Sun</div><div class="day-type type-push">Push</div></div>
+    <div class="strip-day"><div class="day-name">Mon</div><div class="day-type type-legs">Lower</div></div>
+    <div class="strip-day"><div class="day-name">Tue</div><div class="day-type type-cardio">Cardio</div></div>
+    <div class="strip-day"><div class="day-name">Wed</div><div class="day-type type-pull">Pull</div></div>
+    <div class="strip-day"><div class="day-name">Thu</div><div class="day-type type-legs">Lower</div></div>
+    <div class="strip-day"><div class="day-name">Fri</div><div class="day-type type-full">Full</div></div>
+    <div class="strip-day"><div class="day-name">Sat</div><div class="day-type type-rest">Rest</div></div>
+  </div>
+</div>
+
+<div class="tips-banner">
+  <div class="tips-grid">
+    <div class="tip-item"><div class="tip-icon">🔥</div><div><div class="tip-title">Warm Up</div><div class="tip-text">5 min light cardio + dynamic stretches before every session.</div></div></div>
+    <div class="tip-item"><div class="tip-icon">🎯</div><div><div class="tip-title">Form First</div><div class="tip-text">Start light. Perfect form beats heavy weight every time.</div></div></div>
+    <div class="tip-item"><div class="tip-icon">📈</div><div><div class="tip-title">Progressive Overload</div><div class="tip-text">Add a little weight or one extra rep each week to keep progressing.</div></div></div>
+    <div class="tip-item"><div class="tip-icon">👆</div><div><div class="tip-title">Tap Any Exercise</div><div class="tip-text">Tap an exercise row to see step-by-step instructions & a video guide.</div></div></div>
+  </div>
+</div>
+
+<div class="days-section">
+
+  <!-- DAY 1 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleCard(this)">
+      <div class="day-header-left">
+        <div class="day-number">01</div>
+        <div class="day-info">
+          <div class="day-label" style="color:var(--push)">Sunday · Push</div>
+          <div class="day-title">Upper Body — Push</div>
+          <div class="day-subtitle">Chest · Shoulders · Triceps</div>
+        </div>
+      </div>
+      <div class="toggle-icon">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="section-label">Exercises — tap any row for instructions</div>
+      <table>
+        <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Rest</th></tr></thead>
+        <tbody>
+          <tr class="ex-row" onclick="openModal('dumbbell-chest-press')"><td><div class="ex-name-cell">Dumbbell Chest Press<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10–12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('dumbbell-shoulder-press')"><td><div class="ex-name-cell">Dumbbell Shoulder Press<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10–12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('cable-chest-flyes')"><td><div class="ex-name-cell">Cable Chest Flyes<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('lateral-raises')"><td><div class="ex-name-cell">Lateral Raises<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12–15</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('tricep-pushdowns')"><td><div class="ex-name-cell">Tricep Pushdowns (Cable)<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+        </tbody>
+      </table>
+      <div class="day-note"><strong>Why this pairing?</strong> Triceps assist in all pressing movements, so they're already warmed up when you hit isolation work. Most efficient push session possible.</div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleCard(this)">
+      <div class="day-header-left">
+        <div class="day-number">02</div>
+        <div class="day-info">
+          <div class="day-label" style="color:var(--legs)">Monday · Lower</div>
+          <div class="day-title">Lower Body</div>
+          <div class="day-subtitle">Quads · Glutes · Hamstrings · Calves</div>
+        </div>
+      </div>
+      <div class="toggle-icon">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="section-label">Exercises — tap any row for instructions</div>
+      <table>
+        <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Rest</th></tr></thead>
+        <tbody>
+          <tr class="ex-row" onclick="openModal('goblet-squat')"><td><div class="ex-name-cell">Goblet Squat<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10–12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('leg-press')"><td><div class="ex-name-cell">Leg Press<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('romanian-deadlift')"><td><div class="ex-name-cell">Romanian Deadlift (Dumbbell)<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('leg-curl')"><td><div class="ex-name-cell">Leg Curl Machine<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('calf-raises')"><td><div class="ex-name-cell">Calf Raises<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>15</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+        </tbody>
+      </table>
+      <div class="day-note"><strong>Tip:</strong> Keep your chest up during goblet squats. For Romanian Deadlifts, hinge at the hip — feel the stretch in your hamstrings before driving back up.</div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleCard(this)">
+      <div class="day-header-left">
+        <div class="day-number">03</div>
+        <div class="day-info">
+          <div class="day-label" style="color:var(--cardio)">Tuesday · Cardio + Core</div>
+          <div class="day-title">Cardio & Core</div>
+          <div class="day-subtitle">Steady-State · Core Stability · Active Recovery</div>
+        </div>
+      </div>
+      <div class="toggle-icon">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="section-label">Cardio</div>
+      <table>
+        <thead><tr><th>Activity</th><th colspan="3">Duration</th></tr></thead>
+        <tbody>
+          <tr class="activity-row"><td>Treadmill (brisk walk or light jog)</td><td colspan="3">20 minutes</td></tr>
+        </tbody>
+      </table>
+      <div class="section-label">Core Work — tap any row for instructions</div>
+      <table>
+        <thead><tr><th>Exercise</th><th>Sets</th><th>Reps / Duration</th><th>Rest</th></tr></thead>
+        <tbody>
+          <tr class="ex-row" onclick="openModal('plank')"><td><div class="ex-name-cell">Plank<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>30 sec</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('dead-bug')"><td><div class="ex-name-cell">Dead Bug<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('ab-crunch-machine')"><td><div class="ex-name-cell">Seated Ab Crunch Machine<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>15</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('bicycle-crunches')"><td><div class="ex-name-cell">Bicycle Crunches<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>20</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+        </tbody>
+      </table>
+      <div class="day-note"><strong>Midweek reset.</strong> This session keeps you active while your upper body recovers. Keep cardio conversational pace — you should be able to hold a short sentence.</div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleCard(this)">
+      <div class="day-header-left">
+        <div class="day-number">04</div>
+        <div class="day-info">
+          <div class="day-label" style="color:var(--pull)">Wednesday · Pull</div>
+          <div class="day-title">Upper Body — Pull</div>
+          <div class="day-subtitle">Back · Biceps · Rear Delts</div>
+        </div>
+      </div>
+      <div class="toggle-icon">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="section-label">Exercises — tap any row for instructions</div>
+      <table>
+        <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Rest</th></tr></thead>
+        <tbody>
+          <tr class="ex-row" onclick="openModal('lat-pulldown')"><td><div class="ex-name-cell">Lat Pulldown<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10–12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('seated-cable-row')"><td><div class="ex-name-cell">Seated Cable Row<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10–12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('single-arm-row')"><td><div class="ex-name-cell">Dumbbell Single-Arm Row<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10 each</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('face-pulls')"><td><div class="ex-name-cell">Face Pulls<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>15</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('bicep-curls')"><td><div class="ex-name-cell">Dumbbell Bicep Curls<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+        </tbody>
+      </table>
+      <div class="day-note"><strong>Tip:</strong> On lat pulldown, think about pulling your elbows down to your pockets — not your hands. This activates the back instead of the arms. Biceps finish the session fresh.</div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleCard(this)">
+      <div class="day-header-left">
+        <div class="day-number">05</div>
+        <div class="day-info">
+          <div class="day-label" style="color:var(--legs)">Thursday · Lower</div>
+          <div class="day-title">Lower Body + Glutes</div>
+          <div class="day-subtitle">Glutes · Hamstrings · Balance</div>
+        </div>
+      </div>
+      <div class="toggle-icon">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="section-label">Exercises — tap any row for instructions</div>
+      <table>
+        <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Rest</th></tr></thead>
+        <tbody>
+          <tr class="ex-row" onclick="openModal('dumbbell-lunges')"><td><div class="ex-name-cell">Dumbbell Lunges<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10 each leg</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('hip-thrust')"><td><div class="ex-name-cell">Hip Thrust (Barbell / Smith)<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('step-ups')"><td><div class="ex-name-cell">Step-Ups (with Dumbbells)<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10 each leg</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('leg-extension')"><td><div class="ex-name-cell">Leg Extension Machine<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>12</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('seated-calf-raises')"><td><div class="ex-name-cell">Seated Calf Raises<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>15</td><td><span class="rest-badge rest-45">45s</span></td></tr>
+        </tbody>
+      </table>
+      <div class="day-note"><strong>Glute focus day.</strong> Drive through your heel on hip thrusts and squeeze at the top for a full second. Step-ups also improve balance and single-leg stability.</div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleCard(this)">
+      <div class="day-header-left">
+        <div class="day-number">06</div>
+        <div class="day-info">
+          <div class="day-label" style="color:var(--full)">Friday · Full Body</div>
+          <div class="day-title">Full Body + Cardio</div>
+          <div class="day-subtitle">Functional Movement · Light Cardio · Stretch</div>
+        </div>
+      </div>
+      <div class="toggle-icon">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="section-label">Exercises — tap any row for instructions</div>
+      <table>
+        <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Rest</th></tr></thead>
+        <tbody>
+          <tr class="ex-row" onclick="openModal('dumbbell-deadlift')"><td><div class="ex-name-cell">Dumbbell Deadlift<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('dumbbell-bench-press')"><td><div class="ex-name-cell">Dumbbell Bench Press<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>10</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+          <tr class="ex-row" onclick="openModal('assisted-pull-up')"><td><div class="ex-name-cell">Assisted Pull-Up Machine<span class="ex-hint">▸ HOW TO</span></div></td><td><span class="sets-badge">3</span></td><td>8–10</td><td><span class="rest-badge rest-60">60s</span></td></tr>
+        </tbody>
+      </table>
+      <div class="section-label">Cardio & Recovery</div>
+      <table>
+        <thead><tr><th>Activity</th><th colspan="3">Duration</th></tr></thead>
+        <tbody>
+          <tr class="activity-row"><td>Elliptical or Bike (easy pace)</td><td colspan="3">15 minutes</td></tr>
+          <tr class="activity-row"><td>Foam Rolling + Full Body Stretch</td><td colspan="3">10 minutes</td></tr>
+        </tbody>
+      </table>
+      <div class="day-note"><strong>Finish strong.</strong> Keep weights moderate today — this is about movement quality and setting up a great recovery before Saturday rest. Foam rolling your quads, hamstrings, and upper back will help enormously.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">KSHITIJ'S BEGINNER PLAN</div>
+  <div class="footer-right">Review after 4–6 weeks · Increase load progressively</div>
+</footer>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-gif-area" id="modalGifArea"><span id="modalEmoji"></span></div>
+    <div class="modal-body">
+      <div class="modal-tag" id="modalTag"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-muscles" id="modalMuscles"></div>
+      <div class="modal-section-title">HOW TO DO IT</div>
+      <div class="modal-steps" id="modalSteps"></div>
+      <div class="modal-tip" id="modalTip"></div>
+      <a class="modal-yt" id="modalYT" href="#" target="_blank" rel="noopener noreferrer">
+        <div class="yt-icon">▶</div>
+        <div>
+          <div class="yt-label">Watch on YouTube</div>
+          <div class="yt-title" id="modalYTTitle"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const exercises = {
+  'dumbbell-chest-press': {
+    name: 'Dumbbell Chest Press', tag: 'Day 1 · Push · Chest', emoji: '🏋️',
+    gif: 'https://i.imgur.com/bwsF9Fx.gif',
+    muscles: ['Chest', 'Front Delts', 'Triceps'],
+    steps: ['Lie flat on a bench, dumbbell in each hand at chest level, elbows at ~45°.','Press the dumbbells straight up until arms are fully extended — don\'t lock elbows.','Pause briefly at the top and feel the chest squeeze.','Slowly lower the dumbbells back to chest level over 2 seconds.','Keep feet flat on the floor and shoulder blades pinched into the bench.'],
+    tip: '<strong>Key cue:</strong> Imagine pushing the ceiling away. Keep shoulder blades retracted for stability — this protects your shoulders.',
+    yt: 'https://www.youtube.com/watch?v=VmB1G1K7v94', ytTitle: 'Dumbbell Chest Press — Proper Form Guide'
+  },
+  'dumbbell-shoulder-press': {
+    name: 'Dumbbell Shoulder Press', tag: 'Day 1 · Push · Shoulders', emoji: '💪',
+    gif: 'https://i.imgur.com/l8pLp4M.gif',
+    muscles: ['Front Delts', 'Side Delts', 'Triceps'],
+    steps: ['Sit on a bench with back support, dumbbells at shoulder height, palms facing forward.','Brace your core and press both dumbbells overhead in a slight arc.','Stop just before the dumbbells touch at the top — keep slight tension.','Slowly lower back to shoulder height over 2 seconds.','Keep your lower back neutral — avoid excessive arching.'],
+    tip: '<strong>Key cue:</strong> Don\'t let the dumbbells drift back behind your head. They should travel in a clean vertical line directly above your shoulders.',
+    yt: 'https://www.youtube.com/watch?v=qEwKCR5JCog', ytTitle: 'Dumbbell Shoulder Press — Complete Tutorial'
+  },
+  'cable-chest-flyes': {
+    name: 'Cable Chest Flyes', tag: 'Day 1 · Push · Chest', emoji: '🔄',
+    gif: 'https://i.imgur.com/9SH2Sby.gif',
+    muscles: ['Chest (Inner)', 'Front Delts'],
+    steps: ['Set cable pulleys to chest height. Stand in the centre holding a handle in each hand.','Step forward slightly, arms extended out to sides with a soft bend in elbows.','Bring hands together in front of your chest in a hugging arc motion.','Squeeze your chest hard at the centre for 1 full second.','Slowly open arms back — feel the stretch in your chest at the bottom.'],
+    tip: '<strong>Key cue:</strong> Think "hugging a barrel." The arc shape should remain constant — never straighten your arms or let elbows drop below wrists.',
+    yt: 'https://www.youtube.com/watch?v=WEM9FCIPlxQ', ytTitle: 'Cable Chest Fly — Proper Technique'
+  },
+  'lateral-raises': {
+    name: 'Lateral Raises', tag: 'Day 1 · Push · Shoulders', emoji: '🦅',
+    gif: 'https://i.imgur.com/8qSQl8N.gif',
+    muscles: ['Side Delts', 'Traps (upper)'],
+    steps: ['Stand with feet hip-width apart, a dumbbell in each hand at your sides.','Keep a slight forward lean and soft bend in your elbows throughout.','Raise both arms out to your sides until they reach shoulder height — forming a "T".','Lead with your pinkies slightly higher than your thumbs.','Slowly lower back over 2–3 seconds — resist gravity on the way down.'],
+    tip: '<strong>Key cue:</strong> Use lighter weight than you think. The eccentric (lowering) builds the muscle. Most people go too heavy and shrug — keep your traps relaxed.',
+    yt: 'https://www.youtube.com/watch?v=3VcKaXpzqRo', ytTitle: 'How To Do Lateral Raises Correctly'
+  },
+  'tricep-pushdowns': {
+    name: 'Tricep Pushdowns (Cable)', tag: 'Day 1 · Push · Triceps', emoji: '⬇️',
+    gif: 'https://i.imgur.com/O4wvEEn.gif',
+    muscles: ['Triceps (all 3 heads)'],
+    steps: ['Stand at a cable machine, pulley set high. Attach a bar or rope.','Grip the handle with palms facing down. Pin your elbows firmly at your sides.','Start with forearms parallel to the floor.','Push the handle down until your arms are fully extended — squeeze triceps at the bottom.','Slowly return to start — let elbows stay locked in place the whole time.'],
+    tip: '<strong>Key cue:</strong> Only your forearms should move. If your elbows swing forward, the weight is too heavy. Elbows glued to ribs = proper form.',
+    yt: 'https://www.youtube.com/watch?v=2-LAMcpzODU', ytTitle: 'Tricep Pushdown — Cable Machine Form Guide'
+  },
+  'goblet-squat': {
+    name: 'Goblet Squat', tag: 'Day 2 · Lower · Quads & Glutes', emoji: '🏆',
+    gif: 'https://i.imgur.com/GFp6aEX.gif',
+    muscles: ['Quads', 'Glutes', 'Core', 'Hamstrings'],
+    steps: ['Hold one dumbbell vertically at chest height with both hands cupped around the top end.','Stand with feet slightly wider than shoulder-width, toes turned out ~30°.','Brace your core, chest up, and sit back and down as if lowering onto a chair.','Go until thighs are at least parallel to the floor — or as low as comfortable.','Drive through both heels to stand, squeezing glutes at the top.'],
+    tip: '<strong>Key cue:</strong> Keep your chest tall and elbows between your knees at the bottom. The dumbbell acts as a counterweight — use it to sit deeper with better posture.',
+    yt: 'https://www.youtube.com/watch?v=MxsFDhcyFyE', ytTitle: 'How To Do A Goblet Squat — Beginner Tutorial'
+  },
+  'leg-press': {
+    name: 'Leg Press', tag: 'Day 2 · Lower · Quads', emoji: '🦵',
+    gif: 'https://i.imgur.com/kA9zVXP.gif',
+    muscles: ['Quads', 'Glutes', 'Hamstrings'],
+    steps: ['Sit in the leg press with back flat against the pad.','Place feet shoulder-width apart on the platform, toes slightly outward.','Release safety handles. Lower the platform by bending knees to 90°.','Push the platform away by extending your legs — don\'t lock out knees at the top.','Slowly lower back with control. Repeat.'],
+    tip: '<strong>Key cue:</strong> Never let your lower back round off the pad. A higher foot placement targets glutes more; lower placement hits quads harder.',
+    yt: 'https://www.youtube.com/watch?v=IZxyjW7MPJQ', ytTitle: 'Leg Press — Proper Form & Common Mistakes'
+  },
+  'romanian-deadlift': {
+    name: 'Romanian Deadlift (Dumbbell)', tag: 'Day 2 · Lower · Hamstrings', emoji: '⬇️',
+    gif: 'https://i.imgur.com/mf5PJoQ.gif',
+    muscles: ['Hamstrings', 'Glutes', 'Lower Back'],
+    steps: ['Stand with feet hip-width apart, a dumbbell in each hand resting against your thighs.','Maintain a soft, fixed bend in your knees throughout — this is not a squat.','Hinge at the hips, pushing them back while lowering the dumbbells along your legs.','Lower until you feel a deep stretch in your hamstrings (typically mid-shin level).','Drive hips forward to return to standing. Squeeze your glutes at the top.'],
+    tip: '<strong>Key cue:</strong> This is a hip hinge — not a squat. Your shins stay mostly vertical. Think "push hips back" not "bend knees." Keep dumbbells close to your legs the entire way.',
+    yt: 'https://www.youtube.com/watch?v=2SHsk9AzdjA', ytTitle: 'Romanian Deadlift Form — Dumbbell Tutorial'
+  },
+  'leg-curl': {
+    name: 'Leg Curl Machine', tag: 'Day 2 · Lower · Hamstrings', emoji: '🦵',
+    gif: 'https://i.imgur.com/0TkVhOF.gif',
+    muscles: ['Hamstrings', 'Calves (minor)'],
+    steps: ['Adjust the machine so the pad sits just above your heels when lying down.','Lie face down with thighs flat on the bench. Grip the handles.','Curl your heels toward your glutes in a smooth controlled arc.','Pause and squeeze your hamstrings hard at the peak contraction.','Slowly lower the weight back to start over 2–3 seconds. Don\'t let it slam down.'],
+    tip: '<strong>Key cue:</strong> Keep your hips pressed into the bench throughout. If your hips lift off, the weight is too heavy. Feel the hamstring — don\'t just move the machine.',
+    yt: 'https://www.youtube.com/watch?v=1Tq3QdYUuHs', ytTitle: 'Lying Leg Curl — Proper Form Tutorial'
+  },
+  'calf-raises': {
+    name: 'Calf Raises', tag: 'Day 2 · Lower · Calves', emoji: '⬆️',
+    gif: 'https://i.imgur.com/jFZ8oVd.gif',
+    muscles: ['Gastrocnemius', 'Soleus'],
+    steps: ['Stand on the edge of a step or platform with heels hanging off. Hold dumbbells for resistance.','Let your heels drop below the platform for a full stretch at the bottom.','Rise up onto your toes as high as possible.','Pause at the top for 1 full second — squeeze your calves hard.','Slowly lower back to the deep stretch. Never bounce.'],
+    tip: '<strong>Key cue:</strong> Full range of motion beats heavy weight every time. Stretch all the way down, squeeze all the way up. Fast partial reps with heavy weight are nearly useless for calves.',
+    yt: 'https://www.youtube.com/watch?v=gwLzBJYoWlI', ytTitle: 'Standing Calf Raises — Full Tutorial'
+  },
+  'plank': {
+    name: 'Plank', tag: 'Day 3 · Core · Stability', emoji: '🪨',
+    gif: 'https://i.imgur.com/h6WrfhX.gif',
+    muscles: ['Core', 'Transverse Abdominis', 'Shoulders', 'Glutes'],
+    steps: ['Get into a forearm push-up position — rest on forearms, not hands.','Body forms a straight line from head to heels — no sagging hips or raised butt.','Engage your core hard — brace like you\'re about to take a punch to the stomach.','Keep your neck neutral — look down at the floor, not forward.','Breathe steadily and hold for the target time.'],
+    tip: '<strong>Key cue:</strong> Squeeze everything — abs, glutes, quads. A plank is a full-body isometric. The moment your hips drop, end the set. Quality over duration.',
+    yt: 'https://www.youtube.com/watch?v=pSHjTRCQxIw', ytTitle: 'How to Do a Perfect Plank'
+  },
+  'dead-bug': {
+    name: 'Dead Bug', tag: 'Day 3 · Core · Stability', emoji: '🐛',
+    gif: 'https://i.imgur.com/YH9kFcQ.gif',
+    muscles: ['Deep Core', 'Transverse Abdominis', 'Hip Flexors'],
+    steps: ['Lie on your back, arms pointing straight up to the ceiling.','Raise your knees to 90° tabletop position — lower legs parallel to the floor.','Press your lower back FIRMLY into the floor — keep it there the whole time.','Slowly lower your right arm overhead while extending your left leg out straight.','Return to start. Switch sides. That\'s 1 rep — never let your back arch off the floor.'],
+    tip: '<strong>Key cue:</strong> Your lower back MUST stay flat on the floor at all times. If it lifts, you\'ve gone too far. This trains anti-extension — one of the most critical core skills for injury prevention.',
+    yt: 'https://www.youtube.com/watch?v=4XLEnwUr1d8', ytTitle: 'Dead Bug Exercise — How To Do It Correctly'
+  },
+  'ab-crunch-machine': {
+    name: 'Seated Ab Crunch Machine', tag: 'Day 3 · Core · Abs', emoji: '🎯',
+    gif: 'https://i.imgur.com/q8nrYmn.gif',
+    muscles: ['Rectus Abdominis', 'Obliques'],
+    steps: ['Adjust the seat so upper pads rest on your upper chest/collar area.','Hold the handles and plant feet flat under the foot pads.','Exhale and crunch forward — drive the movement with your abs, not your arms.','Come down until you feel your abs fully contract, then pause for 1 second.','Slowly return to the start, maintaining tension throughout — don\'t let weight stack crash.'],
+    tip: '<strong>Key cue:</strong> Your arms are just for stability. Drive everything with your abs. Go slow — momentum bypasses the muscle and makes this exercise pointless.',
+    yt: 'https://www.youtube.com/watch?v=V3KeGKL-2jY', ytTitle: 'Ab Crunch Machine — Proper Form'
+  },
+  'bicycle-crunches': {
+    name: 'Bicycle Crunches', tag: 'Day 3 · Core · Abs & Obliques', emoji: '🚲',
+    gif: 'https://i.imgur.com/fIGmCLh.gif',
+    muscles: ['Obliques', 'Rectus Abdominis', 'Hip Flexors'],
+    steps: ['Lie on your back, hands lightly behind your head — don\'t pull your neck.','Lift shoulders slightly off the ground and hold that tension throughout.','Bring your right knee toward your chest while rotating your left elbow to meet it.','Extend your right leg out, switch — now left knee in, right elbow rotates toward it.','Continue alternating in a deliberate, controlled pedalling motion.'],
+    tip: '<strong>Key cue:</strong> Slow and controlled beats fast every time. Each rep should feel like a real oblique rotation — if it feels like you\'re just flailing, you\'re going too fast and it becomes a neck exercise.',
+    yt: 'https://www.youtube.com/watch?v=9FGilxCbdz8', ytTitle: 'How To Do Bicycle Crunches Correctly'
+  },
+  'lat-pulldown': {
+    name: 'Lat Pulldown', tag: 'Day 4 · Pull · Back', emoji: '⬇️',
+    gif: 'https://i.imgur.com/j0OHJIV.gif',
+    muscles: ['Lats', 'Biceps', 'Rear Delts', 'Rhomboids'],
+    steps: ['Sit at the lat pulldown machine, lock thighs under the pad.','Grip the bar slightly wider than shoulder-width, palms facing away.','Lean back slightly (~15°) and initiate by pulling shoulder blades down and in.','Pull the bar to your upper chest, driving your elbows toward your hips.','Slowly let the bar rise back up until arms are nearly fully extended.'],
+    tip: '<strong>Key cue:</strong> Think "elbows to hips" not "hands to chest." This shifts the load from biceps to lats. Initiate with your shoulder blades, not your arms.',
+    yt: 'https://www.youtube.com/watch?v=CAwf7n6Luuc', ytTitle: 'Lat Pulldown — Perfect Form Tutorial'
+  },
+  'seated-cable-row': {
+    name: 'Seated Cable Row', tag: 'Day 4 · Pull · Back', emoji: '🔙',
+    gif: 'https://i.imgur.com/6VkB3aH.gif',
+    muscles: ['Mid Back', 'Rhomboids', 'Lats', 'Biceps'],
+    steps: ['Sit at the cable row machine, feet on the platform, slight bend in knees.','Hold the handle and sit tall — don\'t round your lower back.','Start with arms extended and a slight forward lean to feel the back stretch.','Row the handle to your lower abdomen — elbows drive straight back, not flaring out.','Squeeze shoulder blades together at the end, then slowly return to start.'],
+    tip: '<strong>Key cue:</strong> The movement starts with pulling your shoulder blades back — not bending your arms. Imagine you\'re cracking a walnut between your shoulder blades.',
+    yt: 'https://www.youtube.com/watch?v=GZbfZ033f74', ytTitle: 'Seated Cable Row — How To Do It Right'
+  },
+  'single-arm-row': {
+    name: 'Dumbbell Single-Arm Row', tag: 'Day 4 · Pull · Back', emoji: '💪',
+    gif: 'https://i.imgur.com/HpFfUX9.gif',
+    muscles: ['Lats', 'Mid Back', 'Rhomboids', 'Biceps'],
+    steps: ['Place one knee and same-side hand flat on a bench for support.','Hold a dumbbell in your free hand, arm hanging straight down.','Keep your back flat and parallel to the floor — no rotation.','Row the dumbbell up toward your hip, elbow driving toward the ceiling.','Pause at the top, then slowly lower. Complete all reps before switching sides.'],
+    tip: '<strong>Key cue:</strong> Elbow goes UP and BACK — like starting a lawnmower. Keep the dumbbell close to your body and avoid rotating your torso.',
+    yt: 'https://www.youtube.com/watch?v=pYcpY20QaE8', ytTitle: 'Dumbbell Row — Proper Form Guide'
+  },
+  'face-pulls': {
+    name: 'Face Pulls', tag: 'Day 4 · Pull · Rear Delts', emoji: '😤',
+    gif: 'https://i.imgur.com/vWfTlGl.gif',
+    muscles: ['Rear Delts', 'Rotator Cuff', 'Traps', 'Rhomboids'],
+    steps: ['Set cable pulley to face/upper-chest height with a rope attachment.','Grab both rope ends with palms facing inward. Step back to create tension.','Pull the rope toward your face, separating hands as you pull.','At peak: hands beside your ears, elbows flared wide — external rotation.','Slowly return to start. Keep weight light — this is a shoulder health exercise.'],
+    tip: '<strong>Key cue:</strong> Pull to the FACE, not the neck or chest. The external rotation at the end (hands by ears) is the key part — this builds healthy rotator cuff and rear delts most people neglect.',
+    yt: 'https://www.youtube.com/watch?v=rep-qVOkqgk', ytTitle: 'Face Pulls — Why Everyone Should Do Them'
+  },
+  'bicep-curls': {
+    name: 'Dumbbell Bicep Curls', tag: 'Day 4 · Pull · Biceps', emoji: '💪',
+    gif: 'https://i.imgur.com/LX5S6tz.gif',
+    muscles: ['Biceps', 'Brachialis', 'Forearms'],
+    steps: ['Stand with feet hip-width apart, a dumbbell in each hand, palms facing forward.','Pin your elbows to your sides — they must not move during the curl.','Curl both dumbbells up toward your shoulders in a smooth arc.','At the top, rotate your wrists outward slightly (supinate) for full contraction.','Slowly lower over 2–3 seconds — resist gravity. Don\'t drop the weight.'],
+    tip: '<strong>Key cue:</strong> The slow lowering (eccentric) builds as much muscle as the curl itself. Don\'t let your elbows drift forward — if they do, reduce the weight.',
+    yt: 'https://www.youtube.com/watch?v=ykJmrZ5v0Oo', ytTitle: 'Dumbbell Curl — Perfect Form Guide'
+  },
+  'dumbbell-lunges': {
+    name: 'Dumbbell Lunges', tag: 'Day 5 · Lower · Legs & Glutes', emoji: '🦵',
+    gif: 'https://i.imgur.com/cVbqVjP.gif',
+    muscles: ['Quads', 'Glutes', 'Hamstrings', 'Core'],
+    steps: ['Stand tall with a dumbbell in each hand at your sides.','Step forward with one foot — stride long enough so your back knee nearly touches the floor.','Lower your back knee toward the ground while keeping your front shin vertical.','Push through your front heel to return to the starting position.','Alternate legs each rep, or complete all reps on one side then switch.'],
+    tip: '<strong>Key cue:</strong> Keep your torso upright — don\'t lean forward. Your front knee should track over your second toe, not cave inward. Step out far enough so your front shin stays vertical.',
+    yt: 'https://www.youtube.com/watch?v=D7KaRcUTQeE', ytTitle: 'Dumbbell Lunge — How to Do It Correctly'
+  },
+  'hip-thrust': {
+    name: 'Hip Thrust (Barbell / Smith)', tag: 'Day 5 · Lower · Glutes', emoji: '🍑',
+    gif: 'https://i.imgur.com/9ReBNpz.gif',
+    muscles: ['Glutes', 'Hamstrings', 'Core'],
+    steps: ['Sit on the floor, upper back against a bench, barbell across your hips (use a pad).','Plant feet flat on the floor, hip-width apart, knees bent at ~90°.','Drive through both heels to thrust hips upward until torso is parallel to the ground.','Squeeze your glutes HARD at the top for 1 second — don\'t hyperextend the lower back.','Slowly lower hips back to just above the floor and repeat.'],
+    tip: '<strong>Key cue:</strong> Chin tucked, ribs down — don\'t flare them at the top. The glute squeeze at the top is everything. Use the Smith machine if a free barbell feels unstable.',
+    yt: 'https://www.youtube.com/watch?v=xDmFkJxPzeM', ytTitle: 'Hip Thrust — Perfect Form Tutorial'
+  },
+  'step-ups': {
+    name: 'Step-Ups (with Dumbbells)', tag: 'Day 5 · Lower · Quads & Balance', emoji: '📦',
+    gif: 'https://i.imgur.com/lOkbYbV.gif',
+    muscles: ['Quads', 'Glutes', 'Hamstrings', 'Balance'],
+    steps: ['Stand in front of a sturdy box or bench (knee height or slightly below), holding dumbbells.','Place your right foot fully on the box — the entire foot on the surface.','Press through your right heel to lift your body onto the box.','Bring your left foot up to meet the right, then step back down leading with the left.','Complete all reps on one side, or alternate each rep.'],
+    tip: '<strong>Key cue:</strong> Push through the heel of the foot ON the box — not the foot on the ground. This ensures the glute and quad do the work, not a push-off from below.',
+    yt: 'https://www.youtube.com/watch?v=w8sGEwjEXaI', ytTitle: 'Dumbbell Step-Ups — Form & Technique'
+  },
+  'leg-extension': {
+    name: 'Leg Extension Machine', tag: 'Day 5 · Lower · Quads', emoji: '🦵',
+    gif: 'https://i.imgur.com/l48rBi7.gif',
+    muscles: ['Quadriceps (all 4 heads)'],
+    steps: ['Adjust the machine so the pad sits on your lower shins just above your ankles.','Sit with your back flat against the pad, thighs fully supported on the seat.','Grasp the handles and extend your legs until nearly straight.','Pause and squeeze your quads hard at the top.','Slowly lower back to 90° — don\'t let the weight stack crash down.'],
+    tip: '<strong>Key cue:</strong> Point toes slightly outward to target the inner quad (VMO). Keep the movement slow and controlled — the quad works hardest during the controlled lowering phase.',
+    yt: 'https://www.youtube.com/watch?v=ljO4jkwv8jQ', ytTitle: 'Leg Extension Machine — Proper Form'
+  },
+  'seated-calf-raises': {
+    name: 'Seated Calf Raises', tag: 'Day 5 · Lower · Calves', emoji: '🦶',
+    gif: 'https://i.imgur.com/dSXpgKE.gif',
+    muscles: ['Soleus', 'Gastrocnemius'],
+    steps: ['Sit on the seated calf raise machine, pads resting on your lower thighs.','Place balls of feet on the platform, heels hanging off the edge.','Let your heels drop as low as possible — full stretch at the bottom.','Rise up onto your toes as high as possible and hold for 1 second.','Lower slowly. Soleus responds best to slow, full-range reps.'],
+    tip: '<strong>Key cue:</strong> Seated position specifically targets the soleus — the deep calf that often gets neglected. Full range beats heavy weight. Don\'t shortchange the stretch.',
+    yt: 'https://www.youtube.com/watch?v=JbyjNymZOt0', ytTitle: 'Seated Calf Raises — How To Do Them'
+  },
+  'dumbbell-deadlift': {
+    name: 'Dumbbell Deadlift', tag: 'Day 6 · Full Body · Posterior Chain', emoji: '🏋️',
+    gif: 'https://i.imgur.com/bwsF9Fx.gif',
+    muscles: ['Hamstrings', 'Glutes', 'Lower Back', 'Traps', 'Core'],
+    steps: ['Stand with feet hip-width apart, dumbbells in front of your thighs.','Hinge at the hips — back flat, chest up, core braced.','Lower the dumbbells down your legs until you feel hamstring tension.','Drive your hips forward to stand back up — "push the floor away."','Lock out at the top: glutes squeezed, spine neutral. Don\'t hyperextend.'],
+    tip: '<strong>Key cue:</strong> The deadlift is a HIP HINGE. Keep dumbbells dragging along your legs the whole way. A rounded lower back is the most common error — if this happens, reduce the weight immediately.',
+    yt: 'https://www.youtube.com/watch?v=r4MzxtBKyNE', ytTitle: 'Dumbbell Deadlift — Beginner Form Tutorial'
+  },
+  'dumbbell-bench-press': {
+    name: 'Dumbbell Bench Press', tag: 'Day 6 · Full Body · Chest', emoji: '💪',
+    gif: 'https://i.imgur.com/bwsF9Fx.gif',
+    muscles: ['Chest', 'Front Delts', 'Triceps'],
+    steps: ['Lie flat on a bench, dumbbells at chest level, elbows at 45°.','Press dumbbells upward until arms are extended — avoid locking elbows.','At the top the dumbbells can lightly touch or stay a few centimetres apart.','Lower slowly over 2 seconds back to chest — feel the pec stretch.','Keep feet flat on floor and shoulder blades pinched into the bench.'],
+    tip: '<strong>Key cue:</strong> Unlike a barbell, dumbbells allow a natural arc — bring them slightly together at the top for a better chest squeeze. Control every single rep.',
+    yt: 'https://www.youtube.com/watch?v=VmB1G1K7v94', ytTitle: 'Dumbbell Bench Press — Proper Form Tutorial'
+  },
+  'assisted-pull-up': {
+    name: 'Assisted Pull-Up Machine', tag: 'Day 6 · Full Body · Back & Biceps', emoji: '⬆️',
+    gif: 'https://i.imgur.com/j0OHJIV.gif',
+    muscles: ['Lats', 'Biceps', 'Rhomboids', 'Core'],
+    steps: ['Select a counterweight (more counterweight = easier). Start heavy and reduce over time.','Kneel or step on the platform. Grip handles just wider than shoulder-width, palms away.','Start from a dead hang — arms fully extended, shoulder blades relaxed upward.','Pull up by driving elbows toward your hips — think "lat pulldown but your body moves."','Get chin above the handles, pause, then lower slowly back to full extension.'],
+    tip: '<strong>Key cue:</strong> Initiate with shoulder blade retraction before bending your elbows. As you get stronger, reduce the counterweight. The goal is eventually unassisted pull-ups.',
+    yt: 'https://www.youtube.com/watch?v=dt0BMSrPNJs', ytTitle: 'Assisted Pull-Up Machine — Form Guide'
+  }
+};
+
+function openModal(id) {
+  const ex = exercises[id];
+  if (!ex) return;
+
+  const gifArea = document.getElementById('modalGifArea');
+  document.getElementById('modalEmoji').textContent = ex.emoji;
+
+  // Try to load actual GIF, fall back to emoji placeholder
+  const img = new Image();
+  img.onload = function() {
+    gifArea.innerHTML = '';
+    const imgEl = document.createElement('img');
+    imgEl.src = ex.gif;
+    imgEl.alt = ex.name + ' animation';
+    imgEl.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+    gifArea.appendChild(imgEl);
+  };
+  img.onerror = function() {
+    // Keep emoji placeholder
+    gifArea.innerHTML = '<span style="font-size:64px">' + ex.emoji + '</span>';
+  };
+  img.src = ex.gif;
+
+  document.getElementById('modalTag').textContent = ex.tag;
+  document.getElementById('modalTitle').textContent = ex.name;
+
+  document.getElementById('modalMuscles').innerHTML =
+    ex.muscles.map(m => `<span class="muscle-chip">${m}</span>`).join('');
+
+  document.getElementById('modalSteps').innerHTML =
+    ex.steps.map((s, i) =>
+      `<div class="modal-step"><div class="step-num">${i + 1}</div><div class="step-text">${s}</div></div>`
+    ).join('');
+
+  document.getElementById('modalTip').innerHTML = ex.tip;
+
+  const ytLink = document.getElementById('modalYT');
+  ytLink.href = ex.yt;
+  document.getElementById('modalYTTitle').textContent = ex.ytTitle;
+
+  document.getElementById('modal').scrollTop = 0;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+function toggleCard(header) {
+  header.closest('.day-card').classList.toggle('open');
+}
+</script>
+</body>
+</html>
