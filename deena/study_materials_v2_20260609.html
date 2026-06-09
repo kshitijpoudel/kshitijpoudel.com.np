@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M/SME Credit Analysis – Study Guide | Global IME Bank</title>
+<style>
+  :root {
+    --blue: #185FA5; --blue-light: #E6F1FB; --blue-mid: #378ADD;
+    --teal: #0F6E56; --teal-light: #E1F5EE;
+    --amber: #854F0B; --amber-light: #FAEEDA; --amber-mid: #EF9F27;
+    --green: #3B6D11; --green-light: #EAF3DE;
+    --red: #A32D2D; --red-light: #FCEBEB;
+    --gray: #444441; --gray-light: #F1EFE8; --gray-mid: #888780;
+    --text: #2C2C2A; --text2: #5F5E5A; --text3: #888780;
+    --bg: #FAFAF8; --bg2: #F1EFE8; --border: rgba(0,0,0,0.1);
+    --radius: 10px; --radius-sm: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* HEADER */
+  .header { background: #1a3a5c; color: #fff; padding: 2rem 2rem 1.5rem; }
+  .header-badge { display: inline-block; background: rgba(255,255,255,0.15); font-size: 11px; padding: 3px 10px; border-radius: 20px; margin-bottom: .75rem; letter-spacing: .5px; }
+  .header h1 { font-size: 26px; font-weight: 600; margin-bottom: .25rem; }
+  .header p { font-size: 14px; opacity: .75; }
+  .header-meta { display: flex; gap: 16px; margin-top: 1rem; flex-wrap: wrap; }
+  .header-meta span { font-size: 12px; opacity: .7; display: flex; align-items: center; gap: 5px; }
+
+  /* NAV */
+  .nav-bar { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; white-space: nowrap; }
+  .nav-inner { display: flex; padding: 0 1rem; }
+  .nav-btn { display: inline-flex; align-items: center; gap: 6px; padding: 14px 16px; font-size: 13px; font-weight: 500; color: var(--text3); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; white-space: nowrap; }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+  /* LAYOUT */
+  .main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* TYPOGRAPHY */
+  h2 { font-size: 22px; font-weight: 600; margin-bottom: .5rem; color: var(--text); }
+  h3 { font-size: 16px; font-weight: 600; margin: 1.75rem 0 .6rem; color: var(--text); }
+  h4 { font-size: 14px; font-weight: 600; margin: 1.2rem 0 .4rem; color: var(--text2); }
+  p { font-size: 14px; color: var(--text2); margin-bottom: .6rem; line-height: 1.7; }
+  ul, ol { padding-left: 1.4rem; margin-bottom: .75rem; }
+  li { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 2px; }
+  strong { color: var(--text); font-weight: 600; }
+
+  .section-intro { font-size: 15px; color: var(--text2); border-left: 3px solid var(--blue-mid); padding-left: 1rem; margin-bottom: 1.5rem; line-height: 1.7; }
+
+  /* CARDS */
+  .card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin: .75rem 0; box-shadow: var(--shadow); }
+  .card-title { font-size: 13px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .75rem; }
+
+  /* CALLOUTS */
+  .callout { border-radius: var(--radius-sm); padding: .85rem 1rem; margin: .75rem 0; font-size: 13px; line-height: 1.6; display: flex; gap: 10px; align-items: flex-start; }
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .callout.info { background: var(--blue-light); border-left: 3px solid var(--blue-mid); }
+  .callout.info p, .callout.info li { color: #0c447c; }
+  .callout.warn { background: var(--amber-light); border-left: 3px solid var(--amber-mid); }
+  .callout.warn p, .callout.warn li { color: var(--amber); }
+  .callout.success { background: var(--green-light); border-left: 3px solid #639922; }
+  .callout.success p, .callout.success li { color: var(--green); }
+  .callout.danger { background: var(--red-light); border-left: 3px solid #E24B4A; }
+  .callout.danger p, .callout.danger li { color: var(--red); }
+  .callout-body { flex: 1; }
+  .callout-body p:last-child { margin-bottom: 0; }
+
+  /* FORMULA */
+  .formula-box { background: #1a3a5c; color: #e8f4ff; border-radius: var(--radius-sm); padding: .85rem 1.1rem; font-family: 'Courier New', monospace; font-size: 13px; margin: .6rem 0; line-height: 1.8; }
+  .formula-box .label { font-size: 11px; color: rgba(255,255,255,0.45); display: block; margin-bottom: 3px; font-family: -apple-system, sans-serif; letter-spacing: .5px; text-transform: uppercase; }
+
+  /* TABLES */
+  .tbl-wrap { overflow-x: auto; margin: .75rem 0; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+  thead th { background: var(--gray-light); color: var(--text); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--bg); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: .75rem 0; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: .75rem 0; }
+  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* STEPS */
+  .steps { margin: .75rem 0; }
+  .step { display: flex; gap: 14px; margin-bottom: .75rem; align-items: flex-start; }
+  .step-num { min-width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-body p { margin: 0; font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .step-body strong { color: var(--text); }
+
+  /* BADGES */
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+  .badge.pass { background: var(--green-light); color: var(--green); }
+  .badge.fail { background: var(--red-light); color: var(--red); }
+  .badge.note { background: var(--amber-light); color: var(--amber); }
+  .badge.info { background: var(--blue-light); color: var(--blue); }
+
+  /* RATIO CARDS */
+  .ratio-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; box-shadow: var(--shadow); }
+  .ratio-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .ratio-formula { font-family: 'Courier New', monospace; font-size: 12px; color: var(--blue); background: var(--blue-light); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+  .ratio-threshold { font-size: 12px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+  .ratio-desc { font-size: 12px; color: var(--text3); line-height: 1.5; }
+
+  /* CALC BOX */
+  .calc-box { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: .75rem 0; box-shadow: var(--shadow); }
+  .calc-title { background: var(--gray-light); padding: 8px 14px; font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .4px; }
+  .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .calc-row:last-child { border-bottom: none; }
+  .calc-row.total { background: var(--gray-light); font-weight: 600; color: var(--text); }
+  .calc-row.positive { background: var(--green-light); }
+  .calc-row.negative { background: var(--red-light); }
+  .calc-row span:first-child { color: var(--text2); }
+  .calc-row span:last-child { font-family: 'Courier New', monospace; color: var(--text); }
+  .calc-row.total span, .calc-row.positive span, .calc-row.negative span { color: inherit; }
+
+  /* PROCESS FLOW */
+  .process-flow { display: flex; flex-direction: column; gap: 2px; margin: .75rem 0; }
+  .process-step { display: flex; align-items: stretch; gap: 0; }
+  .process-connector { display: flex; flex-direction: column; align-items: center; width: 32px; flex-shrink: 0; }
+  .process-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--blue); border: 2px solid var(--blue-light); flex-shrink: 0; margin-top: 12px; }
+  .process-line { width: 2px; background: var(--border); flex: 1; margin-top: 2px; }
+  .process-content { flex: 1; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: .65rem .9rem; margin-bottom: 4px; }
+  .process-content strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 2px; }
+  .process-content span { font-size: 12px; color: var(--text3); }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; padding: 0; margin: .6rem 0; }
+  .checklist li { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; font-size: 13px; color: var(--text2); border-bottom: 1px solid var(--border); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '☐'; font-size: 14px; color: var(--text3); flex-shrink: 0; margin-top: 1px; }
+
+  /* TWO-PANEL */
+  .two-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: .75rem 0; }
+  .panel { border-radius: var(--radius); padding: 1rem; }
+  .panel.green { background: var(--green-light); border: 1px solid #C0DD97; }
+  .panel.red { background: var(--red-light); border: 1px solid #F7C1C1; }
+  .panel h4 { color: var(--green); margin-top: 0; }
+  .panel.red h4 { color: var(--red); }
+  .panel li { font-size: 13px; }
+  .panel.green li { color: var(--green); }
+  .panel.red li { color: var(--red); }
+  @media (max-width: 600px) { .two-panel { grid-template-columns: 1fr; } }
+
+  /* SECTION HEADER */
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+  .section-icon { font-size: 28px; }
+  .section-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: var(--blue-light); color: var(--blue); margin-bottom: 4px; }
+
+  /* PRINT */
+  @media print {
+    .nav-bar { display: none; }
+    .section { display: block !important; page-break-before: always; }
+    .section:first-child { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">GLOBAL IME BANK · INTERNAL STUDY MATERIAL</div>
+  <h1>M/SME Credit Analysis</h1>
+  <p>Real Picture Assessment — Complete Study Guide</p>
+  <div class="header-meta">
+    <span>📄 Based on official guideline document</span>
+    <span>📚 6 chapters · All formulas included</span>
+    <span>🎯 Exam prep edition</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="show('overview',this)">📋 Overview</button>
+    <button class="nav-btn" onclick="show('prep',this)">🔍 Preparation</button>
+    <button class="nav-btn" onclick="show('sitevisit',this)">🏢 Site Visit</button>
+    <button class="nav-btn" onclick="show('assets',this)">⚖️ Assets & Liabilities</button>
+    <button class="nav-btn" onclick="show('income',this)">💰 Income & Expenses</button>
+    <button class="nav-btn" onclick="show('ratios',this)">📊 Ratios & Cross-checks</button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="section active" id="s-overview">
+  <div class="section-header">
+    <div class="section-icon">📋</div>
+    <div>
+      <div class="section-tag">Chapter 1</div>
+      <h2>Overview & General Provisions</h2>
+    </div>
+  </div>
+
+  <p class="section-intro">The Real Picture Assessment is how Global IME Bank determines the <strong>true financial situation</strong> of a micro or small business borrower — going beyond official documents to understand what's actually happening on the ground.</p>
+
+  <h3>What is the purpose?</h3>
+  <p>To collect and analyze information that determines two things:</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Ability to Repay</div>
+      <p>Does the business generate enough profit to cover the loan installments?</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Willingness to Repay</div>
+      <p>Does the client have a track record and character that suggests they will actually repay?</p>
+    </div>
+  </div>
+
+  <h3>The 3 stages of credit analysis</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><p><strong>Preparation</strong> — Client screening and loan application filling. Understand the basics before visiting.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><p><strong>Site Visit</strong> — Physical visit to business (and optionally household) to collect and verify information firsthand.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><p><strong>Analytical Processing</strong> — Build financial statements, calculate ratios, and cross-check the data for reliability.</p></div>
+    </div>
+  </div>
+
+  <h3>The 4 credit analysis tools</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Tool</th><th>Equivalent to</th><th>Period covered</th><th>Who prepares it</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Assets & Liabilities</strong></td><td>Balance Sheet</td><td>As of site visit date</td><td>LO calculates manually</td></tr>
+        <tr><td>2</td><td><strong>Income & Expenses</strong></td><td>P&L / Income Statement</td><td>Last 12 full months before visit</td><td>LO calculates manually</td></tr>
+        <tr><td>3</td><td><strong>Financial Ratios</strong></td><td>Ratio analysis</td><td>Based on tools 1 & 2</td><td>LO calculates manually</td></tr>
+        <tr><td>4</td><td><strong>Cross-checking</strong></td><td>N/A (internal verification)</td><td>Compared over time</td><td>LO calculates manually</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><p><strong>Critical rule:</strong> These tools are NOT the client's official financial statements. They are built by the LO from scratch using information observed and collected during the site visit. The client must never fill these in.</p></div>
+  </div>
+
+  <h3>The Golden Rule: Conservative Approach</h3>
+  <p>Applied throughout all analysis. When in doubt, be cautious.</p>
+  <div class="two-panel">
+    <div class="panel green">
+      <h4>⬇️ Minimize (Assets & Income)</h4>
+      <ul>
+        <li>Record assets at minimum fair value</li>
+        <li>If unsure of inventory value, take the lower estimate</li>
+        <li>Exclude receivables over 90 days old</li>
+        <li>Don't count cash the client refuses to show</li>
+        <li>If income is uncertain, take the lower figure</li>
+      </ul>
+    </div>
+    <div class="panel red">
+      <h4>⬆️ Maximize (Liabilities & Expenses)</h4>
+      <ul>
+        <li>Include every liability, even informal ones</li>
+        <li>Use actual (not discounted) rent rates</li>
+        <li>Include all employees — formal and informal</li>
+        <li>Record expenses on accrual basis</li>
+        <li>If expense amount is uncertain, take the higher figure</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Key definitions to know</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Term</th><th>Simple meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>LO / Loan Officer</strong></td><td>Bank staff who conducts the site visit and analysis</td></tr>
+        <tr><td><strong>M/SME</strong></td><td>Micro / Small & Medium Enterprise — small businesses</td></tr>
+        <tr><td><strong>Accrual basis</strong></td><td>Record income/expenses when they are earned/incurred, NOT when cash moves</td></tr>
+        <tr><td><strong>Real picture</strong></td><td>The actual financial situation, including informal/undeclared parts</td></tr>
+        <tr><td><strong>Working capital</strong></td><td>Short-term funds used to run day-to-day operations</td></tr>
+        <tr><td><strong>Equity / Net worth</strong></td><td>What the owner actually owns = Total Assets minus Total Liabilities</td></tr>
+        <tr><td><strong>CICL</strong></td><td>Credit Information Centre Limited — the credit bureau for checking loan history</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== PREPARATION ==================== -->
+<div class="section" id="s-prep">
+  <div class="section-header">
+    <div class="section-icon">🔍</div>
+    <div>
+      <div class="section-tag">Chapter 2</div>
+      <h2>Preparation for Credit Analysis</h2>
+    </div>
+  </div>
+
+  <p class="section-intro">Before the site visit, the LO screens the client and collects the basic information needed to make the visit efficient and targeted.</p>
+
+  <h3>Step 1: Client Screening (first meeting, max 15–20 minutes)</h3>
+  <p>The LO has a structured conversation to assess if the client is even eligible before going further.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Topic</th><th>Key points to discuss</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Business activity</strong></td><td>Industry type, location of business assets and sales points</td></tr>
+        <tr><td>2</td><td><strong>Ownership structure</strong></td><td>Who is the registered owner? Who are the actual decision-makers? How are responsibilities split?</td></tr>
+        <tr><td>3</td><td><strong>Business volumes</strong></td><td>Approximate total assets, liabilities, turnover, and net profit (official AND actual)</td></tr>
+        <tr><td>4</td><td><strong>Personal details</strong></td><td>Age, residence, household composition, previous banking history</td></tr>
+        <tr><td>5</td><td><strong>Loan request</strong></td><td>Purpose, client's own contribution, suitable loan product and repayment schedule</td></tr>
+        <tr><td>6</td><td><strong>Documents</strong></td><td>PAN number, registration, licenses, identity documents, collateral documents</td></tr>
+        <tr><td>7</td><td><strong>Lending conditions</strong></td><td>Product terms, fees, sample payment schedule, expected process timeline</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body"><p>The outcome of screening: both the LO (is the client eligible?) and the client (do they accept the conditions?) decide whether to proceed to a formal application.</p></div>
+  </div>
+
+  <h3>Step 2: Filling the Loan Application</h3>
+  <p>A deeper conversation happens while filling out the application form.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Topic</th><th>What to cover</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Business background</strong></td><td>When did it start? What was the start-up capital? Key milestones and investments.</td></tr>
+        <tr><td>2</td><td><strong>Current details</strong></td><td>Number of employees (permanent vs seasonal), seasonality by month, affiliated entities, contracts, lease agreements</td></tr>
+        <tr><td>3</td><td><strong>Managerial records</strong></td><td>Who keeps records? Paper notebooks, spreadsheets, software? Are records available?</td></tr>
+        <tr><td>4</td><td><strong>Future plans</strong></td><td>Long-term strategy, short-term goals, future borrowing needs</td></tr>
+        <tr><td>5</td><td><strong>Guarantor details</strong></td><td>Relationship to borrower, source of income, outstanding debts</td></tr>
+        <tr><td>6</td><td><strong>Cross-selling</strong></td><td>Identify other bank products the client may need</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Document checklist (copies only of originals)</h3>
+  <ul class="checklist">
+    <li>Citizenship certificate (original must be seen — no copy of a copy)</li>
+    <li>PAN registration certificate</li>
+    <li>Business registration certificate</li>
+    <li>Relevant licenses and permits</li>
+    <li>Property/collateral documents</li>
+    <li>Identity documents of guarantors</li>
+    <li>Previous loan agreements (if any)</li>
+    <li>IEE/EIA clearance if applicable</li>
+  </ul>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><p><strong>Document rule:</strong> Always demand and verify original documents. Making copies from copies is <strong>prohibited</strong> for official documents (citizenship, PAN, license). For other documents (contracts), it's not recommended.</p></div>
+  </div>
+
+  <h3>The full credit process (know this sequence)</h3>
+  <div class="process-flow">
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>1. Loan application submitted</strong><span>Client fills and signs the form with LO's help</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>2. CICL check</strong><span>Credit bureau check for existing loans and payment history</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>3. Document collection</strong><span>All missing documents gathered before or during site visit</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>4. Site visit to business</strong><span>Physical inspection of all business locations</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>5. Site visit to household (optional)</strong><span>Mandatory for first-time micro borrowers</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>6. Collateral valuation</strong><span>If collateral is required for the loan</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>7. Decision making (underwriting)</strong><span>Approval authority reviews and decides</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>8. Pre-disbursement documents</strong><span>Final paperwork required before releasing funds</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div><div class="process-line"></div></div><div class="process-content"><strong>9. Legal papers &amp; disbursement</strong><span>Loan agreement signed, funds released</span></div></div>
+    <div class="process-step"><div class="process-connector"><div class="process-dot"></div></div><div class="process-content"><strong>10. Post-disbursement monitoring</strong><span>Follow-up visits to verify loan use and repayment</span></div></div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><p>The LO can <strong>never promise or guarantee</strong> loan approval to a client. Always say conditions are "tentative" and refer to "Head Office committee" — never name specific individuals as the approval authority.</p></div>
+  </div>
+</div>
+
+<!-- ==================== SITE VISIT ==================== -->
+<div class="section" id="s-sitevisit">
+  <div class="section-header">
+    <div class="section-icon">🏢</div>
+    <div>
+      <div class="section-tag">Chapter 3</div>
+      <h2>Site Visit</h2>
+    </div>
+  </div>
+
+  <p class="section-intro">The site visit is the core of real picture assessment. The LO physically goes to the business and collects all financial information directly — not through the client's self-reported forms.</p>
+
+  <h3>Who must be present during the visit?</h3>
+  <ul>
+    <li><strong>At least one person</strong> with full knowledge of the business state (owner/key shareholder/director)</li>
+    <li><strong>Chief accountant</strong> or person who manages the financial records</li>
+    <li><strong>Activity managers</strong> if the client runs multiple businesses or related entities</li>
+  </ul>
+
+  <h3>Primary requirements for the site visit</h3>
+  <ul class="checklist">
+    <li>Visit must have clear goals and be completed efficiently — no unnecessary delays</li>
+    <li>Prepare a list of questions in advance based on the application information</li>
+    <li>All documents listed during the first meeting must be ready for the LO to review</li>
+    <li>If multiple business locations exist, ALL must be visited — unvisited locations cannot be included in analysis</li>
+    <li>Take photos of all business premises and key assets</li>
+    <li>For repeat clients: photograph proof of how the previous loan was used and how profit was reinvested</li>
+  </ul>
+
+  <h3>Objectives of the site visit</h3>
+  <div class="grid-2">
+    <div class="card"><p>✅ <strong>Verify</strong> ongoing business activities visually</p></div>
+    <div class="card"><p>✅ <strong>Double-check</strong> earlier information provided by the client</p></div>
+    <div class="card"><p>✅ <strong>Collect</strong> commercial, financial, and managerial data as of visit date</p></div>
+    <div class="card"><p>✅ <strong>Evaluate</strong> how well the business is managed</p></div>
+    <div class="card"><p>✅ <strong>Build</strong> a socio-psychological portrait of the client</p></div>
+  </div>
+
+  <h3>What to check and verify at the business</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Area</th><th>What to check</th><th>Red flags</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Business location</strong></td><td>Address matches application; signage visible; actual open hours correct</td><td>Mismatch with documents; closed during business hours</td></tr>
+        <tr><td><strong>Competitive position</strong></td><td>Is the location economically advantageous? Count nearby competitors and compare prices</td><td>Multiple identical competitors; poor visibility</td></tr>
+        <tr><td><strong>Premises condition</strong></td><td>Maintenance level, adequacy of stock, equipment functionality</td><td>Disrepair, empty shelves, broken equipment</td></tr>
+        <tr><td><strong>Property documents</strong></td><td>Ownership certificate OR lease/rental agreement (check expiry, both signatures, rent amount)</td><td>Expired lease; unofficial rent significantly higher than declared</td></tr>
+        <tr><td><strong>Supplier/buyer contracts</strong></td><td>Check validity, actual invoices, delivery documents confirming real transactions</td><td>Contracts exist but no supporting transaction documents</td></tr>
+        <tr><td><strong>Licenses &amp; certificates</strong></td><td>Verify all regulatory requirements are met for the type of business</td><td>Missing, expired, or incorrect licenses</td></tr>
+        <tr><td><strong>Equipment &amp; fixed assets</strong></td><td>Purchase receipts, vehicle registration, technical documents — assess fair market value</td><td>No supporting documents; assets not actually present</td></tr>
+        <tr><td><strong>Accounting records</strong></td><td>Review actual books: notebooks, Excel files, software trial balance, turnover sheets (last 12 months by month)</td><td>No records at all; records prepared only for bank visit</td></tr>
+        <tr><td><strong>Inventory</strong></td><td>Physically count stock — LO must verify, not just accept a list</td><td>Goods not matching records; non-marketable items</td></tr>
+        <tr><td><strong>Production process</strong></td><td>Capacity utilization, shifts, how costs are calculated, seasonality</td><td>Very low utilization; no cost awareness by owner</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Conversation techniques during the visit</h3>
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <p><strong>Repeat questions in different words</strong> at different times during the visit. Consistent answers mean reliable information. Inconsistencies need follow-up.</p>
+      <p style="margin-top:.5rem"><strong>If a client is reluctant</strong> to share real figures: explain that information is strictly confidential and used only for internal bank risk assessment.</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Client behavior</th><th>What it may mean</th><th>LO action</th></tr></thead>
+      <tbody>
+        <tr><td>Exaggerates figures</td><td>May be trying to deceive — inflate their case</td><td>Verify everything; apply conservative approach</td></tr>
+        <tr><td>Understates figures</td><td>May fear disclosure to tax authorities</td><td>Explain confidentiality; reassure and probe further</td></tr>
+        <tr><td>Refuses to show cash</td><td>Could hide assets</td><td>Do not include that cash in the analysis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Site visit to household</h3>
+  <p><strong>When it is mandatory:</strong> First-time micro-borrowers who are the sole owner of their business.</p>
+  <p><strong>What to collect:</strong></p>
+  <ul>
+    <li>Regular family/household expenses (food, utilities, rent, schooling, etc.)</li>
+    <li>Additional income sources beyond the business</li>
+    <li>Significant one-time spending — house construction, weddings, medical emergencies</li>
+  </ul>
+
+  <h3>Socio-economic analysis</h3>
+  <p>Financial ability alone is not enough. The LO must also judge the client's character and willingness to repay.</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Reputation check</div>
+      <p>Ask trustworthy third parties — neighbors, business partners, suppliers — about the client's reputation. A poor reputation in the community is a risk signal.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Payment discipline</div>
+      <p>Review past loan history (CICL report). Check for any defaults, delays, or informal borrowings that weren't declared.</p>
+    </div>
+  </div>
+  <h4>Personal factors to observe and note</h4>
+  <ul>
+    <li>Age and health condition of the client</li>
+    <li>Education level</li>
+    <li>Attitude toward alcohol and gambling</li>
+    <li>Living conditions and stability of residence</li>
+    <li>Marital status; number and age of dependents</li>
+    <li>Severe health issues in the family</li>
+    <li>Business experience and background before this venture</li>
+    <li>Does the client reinvest profit in the business, or spend it personally?</li>
+  </ul>
+</div>
+
+<!-- ==================== ASSETS & LIABILITIES ==================== -->
+<div class="section" id="s-assets">
+  <div class="section-header">
+    <div class="section-icon">⚖️</div>
+    <div>
+      <div class="section-tag">Chapter 4 · Part 1</div>
+      <h2>Assets & Liabilities</h2>
+    </div>
+  </div>
+
+  <p class="section-intro">The Assets & Liabilities table is a snapshot of the business's financial position <strong>on the day of the site visit</strong>. Think of it as a business balance sheet, built by the LO from what they observed.</p>
+
+  <div class="formula-box">
+    <span class="label">Core equation (always true)</span>
+    Assets = Liabilities + Equity<br>
+    Equity (Net Worth) = Total Assets − Total Liabilities
+  </div>
+
+  <h3>Current Assets — Section I</h3>
+  <p>Assets that can be converted to cash within 1 year.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>What's included</th><th>How to verify</th><th>Key rules</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1.1.1 Cash (Cashbox)</strong></td><td>All physical cash — at the counter, in the safe, in cash machines — money actively revolving in the business</td><td>Client/cashier counts in front of LO</td><td>Only include cash actually shown. Note if low — maybe payments were made that day.</td></tr>
+        <tr><td><strong>1.1.2 Savings</strong></td><td>Cash saved at home; shares/investments quickly convertible to cash</td><td>Client counts in front of LO</td><td>Ask: was it realistic to accumulate this amount in this time? If absent, find out why.</td></tr>
+        <tr><td><strong>1.1.3 Bank accounts</strong></td><td>Positive balance in all bank accounts, deposits, cards</td><td>Bank statement (max 3 days old); internet banking on visit day preferred</td><td>Check date of statement carefully.</td></tr>
+        <tr><td><strong>1.2.1 Accounts receivable</strong></td><td>Money owed by customers for goods/services already delivered but not yet paid</td><td>Internal records, invoices, contracts, bank statements</td><td>Receivables over 90 days old = exclude unless longer term is contractually agreed. Analyze each debtor over 10% of total receivables.</td></tr>
+        <tr><td><strong>1.2.2 Prepayments made</strong></td><td>Advance payments for goods/services not yet received; advance rent for future months</td><td>Payment receipts, contracts</td><td>Note: prepayments for fixed assets (land, equipment) are NOT current assets — treat as investment in fixed assets.</td></tr>
+        <tr><td><strong>1.3.1 Goods (Inventory)</strong></td><td>All stock at purchase price (not selling price). Exclude expired or unsellable goods.</td><td>Physical count by LO (or random sampling for large inventories)</td><td>Ask client to pre-calculate with a list; LO spot-checks. Goods bought on credit still appear here — the payable appears on the liabilities side.</td></tr>
+        <tr><td><strong>1.3.2 Raw materials</strong></td><td>Inputs not yet used in production, at purchase price</td><td>Physical count</td><td>Agri inputs (fodder, chemicals) belong here</td></tr>
+        <tr><td><strong>1.3.3 Finished products</strong></td><td>Completed goods ready for sale, at production cost (not selling price)</td><td>Physical count</td><td>Cost of production may include: raw materials + wages + utilities per unit</td></tr>
+        <tr><td><strong>1.3.4 Animals (working capital)</strong></td><td>Livestock raised for meat, production cycle under 1 year</td><td>Physical count; vet records if available</td><td>Distinguished from productive herd (which is a fixed asset)</td></tr>
+        <tr><td><strong>1.3.5 Crop investments</strong></td><td>Total costs already spent on current crop cycle (soil prep, seeds, labour) up to visit date</td><td>Visual verification + calculation</td><td>Only for agricultural businesses with ongoing crop cycle</td></tr>
+        <tr><td><strong>1.3.6 Agricultural stock</strong></td><td>Harvested and stored products awaiting sale</td><td>Visual verification, records</td><td>Self-grown produce only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fixed Assets — Section II</h3>
+  <p>Long-term assets used in the business, valued at <strong>current fair market value</strong> (can be discounted by 10–20% as if sold urgently).</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>What to verify</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>2.1 Equipment &amp; machinery</strong></td><td>Purchase invoice, certificate of acceptance, payment receipts</td><td>Record full name, model, year. Assess current fair market value.</td></tr>
+        <tr><td><strong>2.2 Vehicles</strong></td><td>Vehicle registration certificate</td><td>Market value, not original purchase price</td></tr>
+        <tr><td><strong>2.3 Real estate &amp; land</strong></td><td>Ownership certificate, land documents</td><td>If client built on family land, include construction cost</td></tr>
+        <tr><td><strong>2.4 Productive animals</strong></td><td>Physical count, ownership records</td><td>Livestock used for breeding or milk — not for meat. Different from working capital animals.</td></tr>
+        <tr><td><strong>2.5 Fruit orchards</strong></td><td>Visual verification</td><td>Include present/current value</td></tr>
+        <tr><td><strong>2.6 Investments / capital works</strong></td><td>Construction documents, advance payment receipts</td><td>Includes buildings under construction and prepayments for fixed assets not yet delivered</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Liabilities — Section III</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>What's included</th><th>Key rules</th></tr></thead>
+      <tbody>
+        <tr><td><strong>3.1.1 Accounts payable</strong></td><td>Money owed to suppliers for goods/services already received but not yet paid</td><td>If goods are in inventory on credit, payable must appear here. Analyze concentration — who are the biggest creditors?</td></tr>
+        <tr><td><strong>3.1.2 Customer prepayments received</strong></td><td>Advance payments received from buyers for goods not yet delivered</td><td>Growing prepayments = positive sign (buyers trust the client)</td></tr>
+        <tr><td><strong>3.1.3 Short-term loans</strong></td><td>Outstanding principal of loans from banks, MFIs, private lenders due within 1 year</td><td>Only the outstanding balance — not unused limits. Interest not included here.</td></tr>
+        <tr><td><strong>3.1.4 Other short-term liabilities</strong></td><td>Unpaid salaries, overdue rent, unpaid utilities, unpaid taxes</td><td>Unpaid taxes/rent = high risk signal. Investigate carefully.</td></tr>
+        <tr><td><strong>3.2.1 Long-term bank loans</strong></td><td>Outstanding principal of loans due after 1 year</td><td>Same rules — outstanding balance only, no interest, no unused limits</td></tr>
+        <tr><td><strong>3.2.2 Other long-term liabilities</strong></td><td>Any other obligations due after 1 year</td><td>Include informal long-term borrowings if confirmed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Equity — Section IV</h3>
+  <div class="formula-box">
+    <span class="label">Only one way to calculate equity</span>
+    Equity = Total Assets − Total Liabilities<br>
+    <br>
+    (Never use client's self-declared figure or official financial statements for this)
+  </div>
+
+  <h3>Full worked example from the guideline</h3>
+  <div class="grid-2">
+    <div class="calc-box">
+      <div class="calc-title">Assets (Day 0 — site visit)</div>
+      <div class="calc-row"><span>Cash</span><span>130,000</span></div>
+      <div class="calc-row"><span>Savings</span><span>300,000</span></div>
+      <div class="calc-row"><span>Accounts receivable</span><span>782,000</span></div>
+      <div class="calc-row"><span>Goods in stock</span><span>850,000</span></div>
+      <div class="calc-row"><span>Office equipment</span><span>180,000</span></div>
+      <div class="calc-row"><span>Vehicle</span><span>500,000</span></div>
+      <div class="calc-row total"><span>Total Assets</span><span>2,742,000</span></div>
+    </div>
+    <div class="calc-box">
+      <div class="calc-title">Liabilities + Equity (Day 0)</div>
+      <div class="calc-row"><span>Accounts payable</span><span>180,000</span></div>
+      <div class="calc-row"><span>Short-term loan</span><span>100,000</span></div>
+      <div class="calc-row"><span>Other short-term liabilities</span><span>45,000</span></div>
+      <div class="calc-row"><span>Long-term loans</span><span>0</span></div>
+      <div class="calc-row total"><span>Total Liabilities</span><span>325,000</span></div>
+      <div class="calc-row positive"><span>Owner's Equity</span><span>2,417,000</span></div>
+      <div class="calc-row total"><span>Total L + Equity</span><span>2,742,000</span></div>
+    </div>
+  </div>
+
+  <h3>How transactions affect the table</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Transaction</th><th>What changes</th><th>Equity?</th></tr></thead>
+      <tbody>
+        <tr><td>Receive new loan (NPR 1,000,000)</td><td>Cash ↑ 1M | Long-term liabilities ↑ 1M</td><td><span class="badge note">No change</span></td></tr>
+        <tr><td>Buy goods with cash (NPR 1,000,000)</td><td>Cash ↓ 1M | Inventory ↑ 1M</td><td><span class="badge note">No change</span></td></tr>
+        <tr><td>Repay short-term loan (NPR 100,000)</td><td>Cash ↓ 100K | Short-term loans ↓ 100K</td><td><span class="badge note">No change</span></td></tr>
+        <tr><td>Sell goods for 360K (markup 20%)</td><td>Cash ↑ 360K | Inventory ↓ 300K (cost) | <strong>Profit = 60K</strong></td><td><span class="badge pass">↑ 60,000</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body"><p><strong>Key insight:</strong> Only <strong>selling goods at a markup</strong> increases equity. All other transactions are just shifting money between asset and liability categories — the owner's net worth stays the same.</p><p style="margin-top:.4rem">COGS when markup is 20%: 360,000 ÷ 1.20 = <strong>300,000</strong>. Profit (gross) = 360,000 − 300,000 = <strong>60,000</strong>.</p></div>
+  </div>
+</div>
+
+<!-- ==================== INCOME & EXPENSES ==================== -->
+<div class="section" id="s-income">
+  <div class="section-header">
+    <div class="section-icon">💰</div>
+    <div>
+      <div class="section-tag">Chapter 4 · Part 2</div>
+      <h2>Income & Expenses</h2>
+    </div>
+  </div>
+
+  <p class="section-intro">This statement covers the <strong>last 12 full calendar months</strong> before the site visit. It shows whether the business makes enough profit to repay the requested loan.</p>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><p>This is <strong>not</strong> the fiscal year (Baishakh to Chaitra). It is the 12 full months immediately before the site visit date — rolling 12 months.</p></div>
+  </div>
+
+  <h3>Accrual vs Cash basis (critical concept)</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Accrual basis (what we use)</div>
+      <p>Record income when goods are <strong>shipped/delivered</strong>, not when payment is received.</p>
+      <p style="margin-top:.5rem">Record expenses when they are <strong>incurred</strong>, not when cash is paid.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Example</div>
+      <p>Goods shipped in <strong>March</strong>, payment received in <strong>April</strong> → Revenue counts in <strong>March</strong>.</p>
+      <p style="margin-top:.5rem">Oil change every 9 months costs NPR 12,000 → Monthly accrual = NPR 1,333.</p>
+    </div>
+  </div>
+
+  <h3>Revenue</h3>
+  <p>Income from selling goods, products, or services through normal business operations.</p>
+  <p><strong>Sources of revenue information:</strong></p>
+  <ul>
+    <li>Conversation with the client and key staff (sales managers, accountant)</li>
+    <li>Primary documents: bills, invoices, receipts, cash books, VAT filings</li>
+    <li>Managerial records: notebooks, Excel files</li>
+    <li>Cross-checking calculations (see Chapter 6)</li>
+  </ul>
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body"><p>If the client has multiple business lines (e.g. wholesale + retail, trade + manufacture), <strong>separate the revenue by each activity</strong> for more accurate profitability analysis.</p></div>
+  </div>
+
+  <h3>Cost of Goods Sold (COGS)</h3>
+  <p>The cost of goods that were <strong>actually sold</strong> in the period — not just purchased.</p>
+  <div class="formula-box">
+    <span class="label">In trade (most common)</span>
+    COGS = Net purchase price of goods sold (including customs duties if imported)
+  </div>
+  <div class="formula-box">
+    <span class="label">In manufacturing</span>
+    COGS = Raw materials + Direct labour (piecework) + Utilities per unit — for goods sold in the period
+  </div>
+  <div class="formula-box">
+    <span class="label">Using markup to calculate COGS (the standard method for LOs)</span>
+    COGS = Revenue ÷ (1 + Markup % ÷ 100)
+  </div>
+
+  <div class="card">
+    <div class="card-title">Worked example</div>
+    <p>Revenue = NPR 1,000,000 | Markup = 20%</p>
+    <div class="calc-box" style="margin-top:.5rem">
+      <div class="calc-row"><span>Revenue</span><span>1,000,000</span></div>
+      <div class="calc-row"><span>COGS = 1,000,000 ÷ 1.20</span><span>833,333</span></div>
+      <div class="calc-row positive"><span>Gross Profit</span><span>166,667</span></div>
+    </div>
+  </div>
+
+  <h3>Understanding Markup</h3>
+  <div class="formula-box">
+    <span class="label">Markup formulas</span>
+    Markup % = (Gross Profit ÷ COGS) × 100<br>
+    Selling Price = Cost × (1 + Markup %)<br>
+    <br>
+    Example: Cost = 100, Markup = 20% → Selling Price = 120
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><p><strong>Markup vs Margin — don't confuse them!</strong><br>Markup is calculated on COST. Margin is calculated on REVENUE.<br>Markup 20% on cost of 100 → price 120 → but the margin is 16.7% (20/120).</p></div>
+  </div>
+
+  <h3>Weighted Average Markup (when multiple product types)</h3>
+  <p>When a business sells different products with different markups, use a weighted average based on what actually sold.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Product</th><th>Cost/unit</th><th>Price/unit</th><th>Qty</th><th>Total cost</th><th>Total revenue</th><th>Markup</th></tr></thead>
+      <tbody>
+        <tr><td>T-shirt</td><td>200</td><td>250</td><td>300</td><td>60,000</td><td>75,000</td><td>25%</td></tr>
+        <tr><td>Shirt</td><td>300</td><td>350</td><td>200</td><td>60,000</td><td>70,000</td><td>16.7%</td></tr>
+        <tr><td>Hat</td><td>150</td><td>200</td><td>50</td><td>7,500</td><td>10,000</td><td>33.3%</td></tr>
+        <tr><td>Jacket</td><td>800</td><td>900</td><td>150</td><td>120,000</td><td>135,000</td><td>12.5%</td></tr>
+        <tr><td>Suit</td><td>1,100</td><td>1,300</td><td>120</td><td>132,000</td><td>156,000</td><td>18.2%</td></tr>
+        <tr><td><strong>Total</strong></td><td></td><td></td><td></td><td><strong>379,500</strong></td><td><strong>446,000</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="formula-box">Weighted avg markup = (446,000 − 379,500) ÷ 379,500 × 100 = <strong>17.52%</strong></div>
+
+  <h3>Operating (overhead) expenses</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Expense</th><th>What to include</th><th>How to calculate / verify</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Salaries / wages</strong></td><td>All employees — permanent, seasonal, part-time, informal. All bonuses and benefits.</td><td>Ask about each employee individually. Don't accept a round total without explanation.</td></tr>
+        <tr><td><strong>Rent / lease</strong></td><td>All premises used in business — shop, warehouse, office</td><td>Compare declared rent with fair market rate. If much lower, probe. If client rents from family member and doesn't actually pay — exclude it.</td></tr>
+        <tr><td><strong>Transportation / fuel</strong></td><td>Fuel, vehicle maintenance, tires, spare parts — all vehicles used in business</td><td>Calculate from average mileage × fuel consumption × price. Accrue maintenance costs (oil change every 9 months = monthly/annual equivalent).</td></tr>
+        <tr><td><strong>Interest on business loans</strong></td><td>Interest payments on all business loans (bank, MFI, informal)</td><td>From CICL report and loan offer letters. Loan principal repayment is NOT included here.</td></tr>
+        <tr><td><strong>Taxes</strong></td><td>All taxes: income tax, VAT, profit tax, etc.</td><td>From tax clearance receipts, bank statements. Must be on accrual basis.</td></tr>
+        <tr><td><strong>Other overhead</strong></td><td>Utilities, communications, office supplies, maintenance, insurance</td><td>Receipts, bills, estimated monthly amounts</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Net Profit calculation</h3>
+  <div class="calc-box">
+    <div class="calc-title">Full income &amp; expenses flow</div>
+    <div class="calc-row"><span>Revenue from sales</span><span>XXXX</span></div>
+    <div class="calc-row negative"><span>Cost of goods sold</span><span>(XXXX)</span></div>
+    <div class="calc-row total"><span>Gross Profit</span><span>XXXX</span></div>
+    <div class="calc-row negative"><span>Salaries</span><span>(XXXX)</span></div>
+    <div class="calc-row negative"><span>Rent</span><span>(XXXX)</span></div>
+    <div class="calc-row negative"><span>Transport</span><span>(XXXX)</span></div>
+    <div class="calc-row negative"><span>Interest on business loans</span><span>(XXXX)</span></div>
+    <div class="calc-row negative"><span>Taxes</span><span>(XXXX)</span></div>
+    <div class="calc-row negative"><span>Other overhead</span><span>(XXXX)</span></div>
+    <div class="calc-row total"><span>Operating Business Profit</span><span>XXXX</span></div>
+    <div class="calc-row"><span>+ Other non-business income (rent, pension, salary from job)</span><span>XXXX</span></div>
+    <div class="calc-row negative"><span>− Household personal expenses</span><span>(XXXX)</span></div>
+    <div class="calc-row negative"><span>− Personal loan installments (principal + interest)</span><span>(XXXX)</span></div>
+    <div class="calc-row positive"><span><strong>Net Profit / Available Funds for Loan Repayment</strong></span><span>XXXX</span></div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <p><strong>Personal loan installments</strong> use the <strong>full installment</strong> (principal + interest).</p>
+      <p style="margin-top:.4rem"><strong>Business loan interest</strong> is in overhead expenses. The principal repayment of business loans does NOT appear in expenses — it is handled separately via DSCR ratio.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== RATIOS & CROSS-CHECKS ==================== -->
+<div class="section" id="s-ratios">
+  <div class="section-header">
+    <div class="section-icon">📊</div>
+    <div>
+      <div class="section-tag">Chapters 4.3 & 4.4</div>
+      <h2>Ratios & Cross-checking</h2>
+    </div>
+  </div>
+
+  <p class="section-intro">Financial ratios translate raw numbers into creditworthiness signals. Cross-checking methods verify whether the client's numbers are internally consistent and reliable.</p>
+
+  <h3>The 5 financial ratios (memorize these)</h3>
+  <div class="grid-2">
+    <div class="ratio-card">
+      <div class="ratio-name">1. Debt-to-Equity Ratio (D/E)</div>
+      <div class="ratio-formula">D/E = (Short-term Liabilities + Long-term Liabilities) ÷ Equity</div>
+      <div class="ratio-threshold">✓ Recommended: less than 4.0</div>
+      <div class="ratio-desc">Measures how much of the business is funded by debt vs. the owner's own funds. Lower = safer. Above 4.0 = heavily dependent on borrowed money.</div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-name">2. Liquidity Ratio (Current Ratio)</div>
+      <div class="ratio-formula">LR = Short-term Assets ÷ Short-term Liabilities</div>
+      <div class="ratio-threshold">✓ Recommended: 1.25 or more</div>
+      <div class="ratio-desc">Can the business pay off its short-term debts from current assets? Too high can also mean capital is sitting idle — an opportunity to grow with a loan.</div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-name">3. Net Working Capital / Loan Amount</div>
+      <div class="ratio-formula">NWC/LA = (Short-term Assets − Short-term Liabilities) ÷ Requested Loan Amount</div>
+      <div class="ratio-threshold">✓ Recommended: 1.33 or more</div>
+      <div class="ratio-desc">Only used for working capital loans. Is there sufficient working capital to justify the loan size requested?</div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-name">4. Debt Service Coverage Ratio (DSCR)</div>
+      <div class="ratio-formula">DSCR = Net Profit ÷ Total Annual Loan Payments (all loans incl. requested)</div>
+      <div class="ratio-threshold">✓ Recommended: more than 1.25</div>
+      <div class="ratio-desc">For term loans. Does the annual profit comfortably cover all loan installments? 1.25 means profit is 25% higher than total payments — adequate buffer.</div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-name">5. Interest Coverage Ratio (ICR)</div>
+      <div class="ratio-formula">ICR = Net Profit ÷ Total Annual Interest (all loans incl. requested)</div>
+      <div class="ratio-threshold">✓ Recommended: more than 1.5</div>
+      <div class="ratio-desc">For overdrafts and revolving credit lines. Can profits cover at least the interest charges with a 50% buffer?</div>
+    </div>
+  </div>
+
+  <h3>Quick-reference table</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ratio</th><th>Formula shorthand</th><th>Use when</th><th>Minimum threshold</th></tr></thead>
+      <tbody>
+        <tr><td><strong>D/E</strong></td><td>(STL + LTL) ÷ Equity</td><td>Always</td><td>&lt; 4.0</td></tr>
+        <tr><td><strong>Liquidity</strong></td><td>STA ÷ STL</td><td>Always</td><td>≥ 1.25</td></tr>
+        <tr><td><strong>NWC/LA</strong></td><td>(STA − STL) ÷ Loan Amount</td><td>Working capital loans only</td><td>≥ 1.33</td></tr>
+        <tr><td><strong>DSCR</strong></td><td>Net Profit ÷ Total annual installments</td><td>Term loans</td><td>&gt; 1.25</td></tr>
+        <tr><td><strong>ICR</strong></td><td>Net Profit ÷ Total annual interest</td><td>Overdrafts / revolving credit</td><td>&gt; 1.5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Ratio calculation example — DSCR</div>
+    <p><strong>Given:</strong> Net profit = NPR 500,000/year | Existing loan installment = NPR 200,000/year | New loan installment = NPR 160,000/year</p>
+    <p style="margin-top:.5rem"><strong>Total payments</strong> = 200,000 + 160,000 = NPR 360,000</p>
+    <p style="margin-top:.5rem"><strong>DSCR</strong> = 500,000 ÷ 360,000 = <strong>1.39</strong> <span class="badge pass">Pass ✓ (above 1.25)</span></p>
+    <p style="margin-top:.5rem; color: var(--text3); font-size: 13px">If DSCR were 1.10 → <span class="badge fail">Fail ✗ (below 1.25)</span></p>
+  </div>
+
+  <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+  <h2 style="margin-top:0">Cross-checking Methods</h2>
+  <p>Cross-checking verifies that the information collected is consistent and the numbers make sense together. The LO must identify any suspicious deviations and investigate.</p>
+
+  <h3>Method 1: Equity cross-check (most important)</h3>
+  <p>Tests whether the business's current net worth is logically consistent with what the owner started with and how much they've earned over time.</p>
+
+  <div class="formula-box">
+    <span class="label">For new clients (first time being analyzed)</span>
+    Expected OE = Starting Capital (OE-0) + Accrued Profit + Investments made − Withdrawals taken
+    <br><br>
+    Accrued Profit = Average Annual Net Profit × Number of years in business
+  </div>
+  <div class="formula-box">
+    <span class="label">For repeat clients (analyzed before)</span>
+    Expected OE-2 = OE-1 (from last visit) + Accrued Profit (between visits) + Investments − Withdrawals
+    <br><br>
+    If period between visits is not 12 months:<br>
+    Accrued Profit = Annual NP ÷ 12 × number of months
+  </div>
+
+  <div class="callout success">
+    <div class="callout-icon">✅</div>
+    <div class="callout-body"><p><strong>Acceptable deviation: within ±20%</strong> between actual OE and expected OE. If the gap is larger, investigate further with the client.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Equity cross-check example</div>
+    <p>Started business 10 years ago with NPR 500,000. Annual net profit = NPR 200,000. No major withdrawals or investments.</p>
+    <div class="calc-box" style="margin-top:.5rem">
+      <div class="calc-row"><span>Starting capital (OE-0)</span><span>500,000</span></div>
+      <div class="calc-row"><span>Accrued profit (200,000 × 10 years)</span><span>2,000,000</span></div>
+      <div class="calc-row total"><span>Expected OE</span><span>2,500,000</span></div>
+      <div class="calc-row"><span>Actual OE (Assets − Liabilities)</span><span>2,300,000</span></div>
+      <div class="calc-row positive"><span>Deviation = (2,500,000 − 2,300,000) ÷ 2,500,000</span><span>8% ✓</span></div>
+    </div>
+    <p style="font-size:13px; color: var(--text3); margin-top:.5rem">8% is within ±20% → acceptable. If actual OE were 1,500,000 → deviation = 40% → investigate.</p>
+  </div>
+
+  <h4>What causes the gap? Common reasons</h4>
+  <div class="two-panel">
+    <div class="panel red">
+      <h4>Actual OE &lt; Expected</h4>
+      <ul>
+        <li>Hidden liabilities not identified</li>
+        <li>Undisclosed withdrawals (e.g. for house renovation, wedding)</li>
+        <li>Fixed assets over-valued in previous analysis</li>
+        <li>Profit was overstated (markup error, underestimated expenses)</li>
+        <li>Assets missing from current table</li>
+      </ul>
+    </div>
+    <div class="panel green">
+      <h4>Actual OE &gt; Expected</h4>
+      <ul>
+        <li>Undisclosed liabilities hidden to inflate equity <strong>(serious red flag)</strong></li>
+        <li>Assets not counted in previous visit now counted</li>
+        <li>New investment by owner or new partner joined</li>
+        <li>Profit was understated (extra income not counted)</li>
+        <li>Fixed assets appreciated in value</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Method 2: Cashbox–Sales check</h3>
+  <p>Rough check that daily cash on hand is consistent with reported daily sales.</p>
+  <div class="formula-box">Cash at day-end + All cash expenses during that day = Annual revenue ÷ 365</div>
+  <p>Ask: "How much did you take in yesterday? The day before?" If the answer is very different from the declared annual revenue ÷ 365, investigate.</p>
+
+  <h3>Method 3: Inventory flow check</h3>
+  <p>Tests whether the inventory level today is logically consistent with purchases and sales since the last visit.</p>
+  <div class="formula-box">
+    Inventory (today) = Inventory (last visit) + Purchases during period − COGS during period
+    <br><br>
+    (All values at purchase/cost price — NOT selling price)
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <p><strong>Today's inventory is higher than expected:</strong> Stock was overvalued today, OR client showed goods that don't belong to them, OR COGS was inflated (sales volumes actually lower than declared).</p>
+      <p style="margin-top:.4rem"><strong>Today's inventory is lower than expected:</strong> Purchases were overstated, OR prior stock was over-reported, OR markup used in COGS calculation was wrong.</p>
+    </div>
+  </div>
+
+  <h3>Method 4: Receivables check</h3>
+  <p>Tests whether accounts receivable today are consistent with sales and collections during the period.</p>
+  <div class="formula-box">Receivables (today) = Receivables (last visit) + Sales during period − Cash actually received during period</div>
+
+  <div class="card">
+    <div class="card-title">Receivables check example</div>
+    <p>Receivables at last visit = NPR 160,000 | Sales this period = NPR 3,800,000 | Cash received = NPR 3,650,000</p>
+    <div class="calc-box" style="margin-top:.5rem">
+      <div class="calc-row"><span>Receivables (last visit)</span><span>160,000</span></div>
+      <div class="calc-row"><span>+ Sales this period</span><span>3,800,000</span></div>
+      <div class="calc-row negative"><span>− Cash received</span><span>(3,650,000)</span></div>
+      <div class="calc-row total"><span>Expected receivables (today)</span><span>310,000</span></div>
+    </div>
+    <p style="margin-top:.5rem; font-size: 13px">If actual receivables are within ±10% of NPR 310,000 → <span class="badge pass">Reliable</span>. Otherwise → investigate.</p>
+  </div>
+
+  <h3>Tolerance thresholds — summary</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Cross-check method</th><th>Acceptable deviation</th></tr></thead>
+      <tbody>
+        <tr><td>Equity cross-check</td><td>Within <strong>±20%</strong></td></tr>
+        <tr><td>Cashbox–Sales check</td><td>Within <strong>±10%</strong></td></tr>
+        <tr><td>Inventory flow check</td><td>Within <strong>±10%</strong></td></tr>
+        <tr><td>Receivables check</td><td>Within <strong>±10%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><p>Any deviation beyond these thresholds means the LO must ask additional questions, dig deeper, and potentially revise the financial analysis. Large deviations that can't be explained = a serious credit risk signal.</p></div>
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<footer style="background: var(--gray-light); border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center;">
+  <p style="font-size: 12px; color: var(--text3)">Global IME Bank · M/SME Credit Analysis Study Guide · Based on official guideline document · For internal training use only</p>
+</footer>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
